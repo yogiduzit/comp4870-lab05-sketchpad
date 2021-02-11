@@ -1,0 +1,38 @@
+﻿@page
+<style>
+        /* Some CSS styling */
+        .rightside {
+            float: left;
+            margin-left: 10px;
+        }
+
+        #sketchpad {
+            float: left;
+            height: 300px;
+            width: 600px;
+            border: 2px solid #888;
+            border-radius: 4px;
+            position: relative; /* Necessary for correct mouse co-ords in Firefox */
+        }
+
+        #clear_button, #save_button {
+            float: left;
+            font-size: 15px;
+            padding: 10px;
+            -webkit-appearance: none;
+            background: #feee;
+            border: 1px solid #888;
+            margin-bottom: 5px;
+        }
+</style
+<h1>SignalR Sketchpad</h1
+<div id="sketchpadapp">
+        <div class="rightside">
+            <button id="clear_button" onclick="tellServerToClear()">Clear Canvas</button>
+            <br />
+            <canvas id="sketchpad" width="600" height="300"></canvas>
+        </div
+</div>
+
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/draw.js"></script>
