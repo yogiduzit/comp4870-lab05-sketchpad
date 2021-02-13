@@ -1,6 +1,14 @@
 "use strict";
-
 const connection = new signalR.HubConnectionBuilder().withUrl("/drawDotHub").build();
+
+const getRandomColor = () => {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
 connection.on("updateDot", function (x, y) {
     drawDot(x, y, 8);
@@ -10,9 +18,7 @@ connection.on("clearCanvas", function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
-connection.start().then(function () {
-    // nothing here
-}).catch(function (err) {
+connection.start().catch(function (err) {
     return console.error(err.toString());
 });
 
@@ -101,6 +107,9 @@ if (ctx) {
     canvas.addEventListener('mousedown', sketchpad_mouseDown, false);
     canvas.addEventListener('mousemove', sketchpad_mouseMove, false);
     window.addEventListener('mouseup', sketchpad_mouseUp, false);
+
+    ctx.fillStyle = getRandomColor();
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 } else {
     document.write("Browser not supported!!");
 }
